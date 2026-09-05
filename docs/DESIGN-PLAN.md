@@ -398,18 +398,28 @@ also more tractable.
 
 ### 4.2 The guardrail registry — `project-starter-pack` Plan 2 phase 1
 
-`slop-detect` is designed to consume `guardrails/registry.json`. That file does not exist;
-the guardrails are five prose files, 253 lines, and the three hooks hardcode a grep subset.
-Creating the registry means restructuring guardrails, and `project-starter-pack/AGENTS.md`
+**Status update, 2026-09-05: this dependency is satisfied.** `guardrails/registry.json`
+shipped in `project-starter-pack` #18, along with `build-guardrails.sh`, `guardrails/_format.md`,
+per-ban `trips`/`clean` fixtures, and hooks that read the registry instead of hardcoding greps.
+The owner approval this section said was required was given. Verified at merge: `./test.sh`
+336 passed / 0 failed, ten live detectors proven in both directions, and `registry.json`
+rebuilding byte-identically from the prose.
+
+*The original analysis, kept because the design conclusions below were drawn from it:*
+`slop-detect` is designed to consume `guardrails/registry.json`. That file did not exist;
+the guardrails were five prose files, 253 lines, and the three hooks hardcoded a grep subset.
+Creating the registry meant restructuring guardrails, and `project-starter-pack/AGENTS.md`
 lists *"a change would grow the command surface, or add a slot, question, or guardrail"*
-among the things that require asking the owner first. So this is not merely unbuilt; it is
+among the things that require asking the owner first. So it was not merely unbuilt; it was
 gated on an approval in a repo this plan does not own.
 
 **What the pack needs:** ban IDs (`DES-04`, `WRT-11`, …), a `detect:` field or `manual`, a
 severity, and a stable `registry.json` path relative to a project root.
 
-**What the pack does while waiting:** nothing that depends on it. This is the principal
-argument for building `design-diagram` second rather than `slop-detect` (§6, decision 3).
+**What the pack does while waiting:** nothing that depends on it. This was the principal
+argument for building `design-diagram` second rather than `slop-detect` (§6, decision 3) —
+and it is the part of that argument that has now expired, since there is no longer anything
+to wait for. The arguments that survive are listed under D3.
 When `slop-detect` is eventually built, the degradation rule is fixed by the anti-goals: with
 no project registry it falls back to a bundled default set **and the report says it did**.
 The bundled set is a fallback, never a canonical rule set, and it is never the source that a
@@ -618,11 +628,21 @@ colliding phrase; it can only make the collision visible the next time the pack'
 *The case for `slop-detect` first,* which the roadmap makes: it proves the cross-repo seam,
 it closes the audit's headline gap, and it is the skill with the clearest user demand.
 
-*The case for `design-diagram`,* which the evidence supports: it depends on nothing that
-does not exist — `DESIGN.json` ships as a template and as a worked example
-(`examples/saga-reader/DESIGN.json`) — where `slop-detect` depends on a registry that is
-unbuilt, whose construction is gated on an owner approval **in another repo**, and whose
-headline capability is the part §5 Q4 recommends cutting. `design-diagram` is
+*The case for `design-diagram`,* which the evidence supported at the time: it depends on
+nothing that does not exist — `DESIGN.json` ships as a template and as a worked example
+(`examples/saga-reader/DESIGN.json`) — where `slop-detect` depended on a registry that was
+unbuilt, whose construction was gated on an owner approval **in another repo**, and whose
+headline capability is the part §5 Q4 recommends cutting.
+
+> **Re-decide this, 2026-09-05.** The registry shipped (§4.2), so the strongest clause above
+> — the unbuilt, approval-gated dependency — no longer holds, and the trade-off accepted
+> below ("the cross-repo seam stays unproven for longer") now buys less than it did. Two
+> arguments survive intact and may still be sufficient on their own: `design-diagram` is
+> `runtime: stdlib`, so it ships while the `.venv` question in §4.1 is open; and it stresses
+> the spec harder, being the first skill with a registry of *types* rather than principles
+> and the first to validate an emitted artifact. §5 Q4's recommendation to cut the browser
+> from `slop-detect` is also untouched. This is the owner's call, not a mechanical
+> consequence of the merge. `design-diagram` is
 `runtime: stdlib`, so it ships an installable skill while the `.venv` question is still open
 (§4.1). And it stresses the spec harder: it is the first skill to have a registry of *types*
 rather than *principles*, and the first to validate an *emitted artifact* rather than a
