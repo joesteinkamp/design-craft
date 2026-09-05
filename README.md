@@ -27,6 +27,14 @@ planning documents and nothing else. Milestone M0 has not started.
 The split follows `ux-audit`'s own planning convention: a design plan for architecture, an
 execution plan for milestones and frozen contracts.
 
+## Cross-repo status, 2026-09-05
+
+`project-starter-pack` #18 shipped the guardrail registry, its fixtures, and the token
+contrast validator. That satisfies the dependency `DESIGN-PLAN.md` §4.2 recorded as unbuilt
+and approval-gated, and it removes the strongest clause from decision **D3** (which skill is
+built second). D3 is flagged in place for re-decision; the arguments that survive are noted
+there. Nothing else in either plan changes.
+
 ## The acceptance test
 
 > The spec must describe `ux-audit` accurately without requiring any change to `ux-audit`.
