@@ -36,9 +36,23 @@ framing: the layer becomes a place skills arrive once they have earned it, not a
 decided up front. It also promotes the **import path** to the gating question, and
 `DESIGN-PLAN.md` §6 D1 records what is actually true about it today.
 
-**Still open:** D2 (routing architecture), D3 (which skill is second), D4 (whether
-`ux-audit` migrates — likely settled by D1, but stated rather than assumed), D5 (the
-repo name, the only one that gets more expensive after M1).
+**D4 is decided (2026-09-10):** `ux-audit` is **imported, not migrated.** It stays at
+[`joesteinkamp/ux-audit-skill`](https://github.com/joesteinkamp/ux-audit-skill) and is
+vendored in, which is D1's pattern applied to the skill that already followed it. The
+spec's acceptance test — *describes `ux-audit` without requiring a change to it* — stays
+honest for free, because the subject is not something the spec's author can edit.
+
+**D3 is closed as moot (2026-09-10):** it asked which skill to build *second*, which
+presumed the pack builds its own skills in sequence. D1 removed that premise — skills
+mature in their own repositories and arrive when ready, so there is no queue to order.
+Nothing replaces it.
+
+**D5 is decided (2026-09-10):** keep the name `design-craft`. No rename.
+
+**Still open — D2 only.** Routing: when a task could match two skills, how the right one
+gets picked. The recommendation stands as written (a trigger ledger with a failing test
+on collision, router deferred behind a stated trip-wire) and needs no action until a
+second skill exists to collide with.
 
 ## Cross-repo status, 2026-09-05
 

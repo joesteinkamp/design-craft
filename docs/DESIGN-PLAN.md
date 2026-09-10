@@ -657,7 +657,11 @@ colliding phrase; it can only make the collision visible the next time the pack'
 
 ### D3 — Which skill is built second
 
-**Recommend: `design-diagram`.**
+> **CLOSED AS MOOT, 2026-09-10 (owner).** The question presumed the pack builds its own
+> skills in a sequence it controls. D1 removed that premise: skills mature in their own
+> repositories and are imported when ready, so there is no build order here to decide.
+> Everything below is kept as the record of a question that stopped applying, not as a
+> pending choice.
 
 *The case for `slop-detect` first,* which the roadmap makes: it proves the cross-repo seam,
 it closes the audit's headline gap, and it is the skill with the clearest user demand.
@@ -689,6 +693,11 @@ two external approvals.
 
 ### D4 — Whether `ux-audit` migrates in at all
 
+> **DECIDED, 2026-09-10 (owner): imported, never migrated.** This is D1's pattern applied
+> to the skill that already followed it, and it matches the recommendation below by a
+> shorter route — the pack does not need a reason to leave `ux-audit` alone, because
+> importing is now simply what the pack does with every skill.
+
 **Recommend: migration-never as the default; re-decide at M6 only if a concrete need
 appears.** This departs from the roadmap's migration-last.
 
@@ -708,6 +717,9 @@ ships with no proven skill inside it until `design-diagram` lands, which makes t
 first milestone feel thinner than it is.
 
 ### D5 — The repo name
+
+> **DECIDED, 2026-09-10 (owner): keep `design-craft`.** No rename; the deadline this
+> section attached to M1 is discharged.
 
 **Recommend: keep `design-craft`.** The brief calls it a roadmap placeholder, and it is —
 but the repository now exists under that name, the roadmap's diagram uses it, and
