@@ -27,6 +27,19 @@ planning documents and nothing else. Milestone M0 has not started.
 The split follows `ux-audit`'s own planning convention: a design plan for architecture, an
 execution plan for milestones and frozen contracts.
 
+## Decisions
+
+**D1 is decided (2026-09-10):** monorepo as a *destination* — skills evolve in their
+own repositories and are imported here when ready, the way `agent-global-instructions`
+already treats `ux-audit`. This largely dissolves §7's "should this be five skills"
+framing: the layer becomes a place skills arrive once they have earned it, not a count
+decided up front. It also promotes the **import path** to the gating question, and
+`DESIGN-PLAN.md` §6 D1 records what is actually true about it today.
+
+**Still open:** D2 (routing architecture), D3 (which skill is second), D4 (whether
+`ux-audit` migrates — likely settled by D1, but stated rather than assumed), D5 (the
+repo name, the only one that gets more expensive after M1).
+
 ## Cross-repo status, 2026-09-05
 
 `project-starter-pack` #18 shipped the guardrail registry, its fixtures, and the token

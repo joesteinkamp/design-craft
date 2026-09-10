@@ -590,6 +590,20 @@ Each is a recommendation with its trade-off, not a choice made.
 
 ### D1 — Monorepo or repo-per-skill
 
+> **DECIDED, 2026-09-10 (owner).** Monorepo — but as a **destination, not a
+> workshop.** Skills are evolved in their own repositories and imported here when
+> ready. That is a third pattern this section did not offer, and it is already how
+> `agent-global-instructions` treats `ux-audit`: developed at
+> `joesteinkamp/ux-audit-skill`, vendored into `.agents/skills/`, never edited in
+> place.
+>
+> Two consequences follow. **It largely dissolves §7's framing:** the layer stops
+> being a five-skill plan decided up front and becomes a place where skills arrive
+> once they have earned it, so "should this be five skills" is answered by what
+> matures, not by a count. And **the import path is the thing to get right**,
+> because it is now load-bearing rather than incidental — see the note under D1's
+> condition below.
+
 **Recommend: monorepo**, agreeing with the roadmap, with one condition attached.
 
 *For:* one `test.sh`, one CI job, one `lib/`, one place the shape spec lives next to the
@@ -606,7 +620,27 @@ that exists.
 shared `lib/` means a change to `fixtures.py` can break every skill's gate at once. Against
 that: it breaks them all in CI, in one run, which is the point.
 
-*Migration cost:* near zero today, because the pack has no skills. If `ux-audit` migrates
+*Migration cost:* near zero today, because the pack has no skills.
+
+**The import path, checked 2026-09-10.** With D1 decided as import-when-ready, the
+integrity of an import matters more than the monorepo/multi-repo choice did. What is
+actually true today: `skills-lock.json` is **`npx skills`' lockfile
+([skills.sh](https://skills.sh)), not a format this toolchain owns**, and no script
+in `agent-global-instructions` reads it — `install-commands.sh` names it only in a
+comment. It records one `skillPath` and one `computedHash` per skill, and for
+`ux-audit` that path is `SKILL.md`, while the vendored tree is **66 files** across
+`references/`, `scripts/`, `fixtures/` and `assets/`. So 65 of 66 files are pinned by
+nothing, and a change to any of them is invisible.
+
+This makes the roadmap's Plan 1 phase 6 — "teach `skills-lock.json` about
+directories" — wrong about ownership: the schema belongs to a third-party tool, and
+the scripts that phase lists as touched (`install.sh`, `converge.sh`, `audit.sh`) do
+not read the lock at all. Whether `npx skills` supports a directory mode is not
+documented on skills.sh and was not determined. The options that do not depend on
+that answer: verify the vendored tree independently with a manifest hash the harness
+computes and checks itself, or vendor via a mechanism that hashes trees natively.
+**This is now the gating question for D1 as decided**, and it is a harness question,
+not a `design-craft` one. If `ux-audit` migrates
 later (see D4) the cost is that repo's history, its published URL, and the lock entry that
 points at it.
 
