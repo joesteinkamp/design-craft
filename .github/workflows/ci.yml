@@ -1,0 +1,23 @@
+name: CI
+
+# The gate is stdlib-only by rule, so this needs a stock Python and nothing else:
+# no virtualenv, no Pillow, no browser. If a step here ever needs `pip install`,
+# something has moved onto the gate path that is not allowed there.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Shell lint
+        run: |
+          sudo apt-get update && sudo apt-get install -y shellcheck
+          shellcheck --shell=bash ./test.sh
+
+      - name: Gate
+        run: ./test.sh
