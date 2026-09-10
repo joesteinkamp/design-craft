@@ -27,6 +27,37 @@ planning documents and nothing else. Milestone M0 has not started.
 The split follows `ux-audit`'s own planning convention: a design plan for architecture, an
 execution plan for milestones and frozen contracts.
 
+## Decisions
+
+**D1 is decided (2026-09-10):** monorepo as a *destination* — skills evolve in their
+own repositories and are imported here when ready, the way `agent-global-instructions`
+already treats `ux-audit`. This largely dissolves §7's "should this be five skills"
+framing: the layer becomes a place skills arrive once they have earned it, not a count
+decided up front. It also promotes the **import path** to the gating question, and
+`DESIGN-PLAN.md` §6 D1 records what is actually true about it today.
+
+**D4 is decided (2026-09-10):** `ux-audit` is **imported, not migrated.** It stays at
+[`joesteinkamp/ux-audit-skill`](https://github.com/joesteinkamp/ux-audit-skill) and is
+vendored in, which is D1's pattern applied to the skill that already followed it. The
+spec's acceptance test — *describes `ux-audit` without requiring a change to it* — stays
+honest for free, because the subject is not something the spec's author can edit.
+
+**D3 is closed as moot (2026-09-10):** it asked which skill to build *second*, which
+presumed the pack builds its own skills in sequence. D1 removed that premise — skills
+mature in their own repositories and arrive when ready, so there is no queue to order.
+Nothing replaces it.
+
+**D5 is decided (2026-09-10):** keep the name `design-craft`. No rename.
+
+**D2 is decided (2026-09-10):** the **trigger ledger**, with the router deferred behind
+the trip-wire §3.2 states. A ledger row per trigger names the skill and its object of
+attention, and the gate fails when two skills claim the same object — so defending the
+boundary is a diff review rather than a judgement call. No action needed until a second
+skill exists to collide with.
+
+**All five decisions are settled.** §7's five-skill framing is dissolved by D1 rather
+than answered: skills arrive when they have earned it.
+
 ## Cross-repo status, 2026-09-05
 
 `project-starter-pack` #18 shipped the guardrail registry, its fixtures, and the token
