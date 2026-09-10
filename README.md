@@ -49,10 +49,14 @@ Nothing replaces it.
 
 **D5 is decided (2026-09-10):** keep the name `design-craft`. No rename.
 
-**Still open — D2 only.** Routing: when a task could match two skills, how the right one
-gets picked. The recommendation stands as written (a trigger ledger with a failing test
-on collision, router deferred behind a stated trip-wire) and needs no action until a
-second skill exists to collide with.
+**D2 is decided (2026-09-10):** the **trigger ledger**, with the router deferred behind
+the trip-wire §3.2 states. A ledger row per trigger names the skill and its object of
+attention, and the gate fails when two skills claim the same object — so defending the
+boundary is a diff review rather than a judgement call. No action needed until a second
+skill exists to collide with.
+
+**All five decisions are settled.** §7's five-skill framing is dissolved by D1 rather
+than answered: skills arrive when they have earned it.
 
 ## Cross-repo status, 2026-09-05
 

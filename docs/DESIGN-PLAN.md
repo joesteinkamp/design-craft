@@ -646,6 +646,10 @@ points at it.
 
 ### D2 — Routing architecture
 
+> **DECIDED, 2026-09-10 (owner): the ledger.** Ledger-first with the router deferred
+> behind §3.2's trip-wire, as recommended. The ledger is the mechanism; the router is a
+> contingency with a stated condition, not a plan.
+
 **Recommend: hybrid, ledger-first, router deferred behind the stated trip-wire (§3.2).**
 
 *Trade-off:* more moving parts than either pure option, and the boundary needs defending
