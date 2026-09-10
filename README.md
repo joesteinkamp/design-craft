@@ -14,10 +14,18 @@ gracefully when the project supplies nothing.
 [`ux-audit`](https://github.com/joesteinkamp/ux-audit-skill) is the layer's first and, today,
 only inhabitant. The layer does not need inventing; it needs specifying and populating.
 
-## Status — plans only
+## Status — scaffolded, no skills yet
 
-**No skill lives here yet, and that is deliberate.** This repository currently holds two
-planning documents and nothing else. Milestone M0 has not started.
+**No skill lives here yet, and that is deliberate.** Milestone **M0 is complete**: the
+repository has its gate, its frozen contracts, and CI *before* it has content, so every later
+milestone has something to fail against. `./test.sh` passes on a checkout with zero skills and
+is proven able to fail — each check is run against a deliberately broken fixture tree and
+required to exit non-zero, because a check that cannot fail is not a gate.
+
+What exists: `test.sh`, `scripts/{check_caps,check_contracts,check_ledger}.py`, `lib/` with its
+frozen contracts, `CLAUDE.md` for the pack's conventions, and CI on a stock Python — the gate
+path is stdlib-only by rule and may never gain a dependency. Next is **M1**: the shape spec,
+the `_template/` skeleton, and `docs/TRIGGER-LEDGER.md`.
 
 | Document | What it holds |
 |---|---|

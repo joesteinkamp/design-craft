@@ -383,9 +383,9 @@ triggering condition is present — a skill with no corpus is not asked for `_fo
 Caps enforced: `SKILL.md` ≤150 lines; corpus files ≤120 lines; **contract files uncapped**.
 
 ```
-check_caps.py [ROOT]                                    # (proposed, M0)
-check_contracts.py [ROOT]                               # (proposed, M0)
-check_ledger.py [ROOT]                                  # (proposed, M0)
+check_caps.py [ROOT]                                    # frozen, M0
+check_contracts.py [ROOT]                               # frozen, M0
+check_ledger.py [ROOT]                                  # frozen, M0
 check_export.py EXPORT_DIR                              # (proposed, M4)
 ```
 Each exits 1 with itemized errors. `check_contracts.py` diffs every `scripts/README.md`
