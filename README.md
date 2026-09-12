@@ -14,7 +14,7 @@ gracefully when the project supplies nothing.
 [`ux-audit`](https://github.com/joesteinkamp/ux-audit-skill) is the layer's first and, today,
 only inhabitant. The layer does not need inventing; it needs specifying and populating.
 
-## Status — spec written, no skills yet
+## Status — spec and shared gate runner, no skills yet
 
 **No skill lives here yet, and that is deliberate.** Milestone **M0 is complete**: the
 repository has its gate, its frozen contracts, and CI *before* it has content, so every later
@@ -35,10 +35,18 @@ this pack does not own.
 exits 0 against an unmodified checkout. If it ever fails there, the spec is wrong and gets
 corrected — `ux-audit` is not edited to fit.
 
-What exists: `test.sh` (12 checks, each proven able to fail), `scripts/` with four checkers,
-`lib/` with its frozen contracts, `SKILL-SHAPE.md`, `_template/`, `CLAUDE.md`, and CI on a
-stock Python — the gate path is stdlib-only by rule and may never gain a dependency. Next is
-**M2**: `lib/fixtures.py`, the shared gate runner.
+**M2 is complete.** `lib/fixtures.py` is the pack's one fixture runner — the generic half of
+`ux-audit`'s `check_fixtures.py`, with the match predicate injected by the caller. It is an
+**extraction, not a rewrite**, and its test proves that the only way it can be proven:
+byte-for-byte identical output to the reference on all five shipped fixtures, then four
+deliberate breakages that must fail and one boundary case that must not. Nothing else was
+extracted — `lib/registry.py` waits for M3 to prove a second registry exists.
+
+What exists: `test.sh` (13 checks, each proven able to fail), `scripts/` with four checkers,
+`lib/fixtures.py`, `SKILL-SHAPE.md`, `_template/`, `docs/TRIGGER-LEDGER.md`, `CLAUDE.md`, and
+CI on a stock Python — the gate path is stdlib-only by rule and may never gain a dependency.
+Next is **M3**: `design-diagram`, the first skill built *to* the spec rather than derived from
+one.
 
 | Document | What it holds |
 |---|---|

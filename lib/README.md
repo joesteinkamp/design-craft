@@ -4,12 +4,12 @@ Dual-homed with Appendix A of [`docs/EXECUTION-PLAN.md`](../docs/EXECUTION-PLAN.
 same rule: **change both in the same commit or don't change them.** These are library entry
 points, not CLIs — the caller owns the exit code.
 
-Both are **(proposed)**: the scripts land in later milestones and the contracts may change
-freely until then. `lib/` exists at M0 so the export path (M4) has something to copy, and so
-these contracts have a home to be checked against.
+`fixtures.run` is **frozen** — it landed in M2. `registry.build` is still **(proposed)** and may
+change freely until M3, per the two-consumers rule: nothing is extracted into `lib/` until a
+second consumer proves the abstraction is real.
 
 ```
-fixtures.run(fixture_root, match_predicate) -> (failures, notes)   # (proposed, M2)
+fixtures.run(fixture_root, match_predicate) -> (failures, notes)   # frozen, M2
 ```
 Library entry point, not a CLI. Reproduces `ux-audit`'s `check_fixtures.py` semantics:
 `must_find` / `must_not_find` / `max_severity` / `max_findings` / `min_overall` / `max_overall`

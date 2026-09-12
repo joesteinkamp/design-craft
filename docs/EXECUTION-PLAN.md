@@ -403,7 +403,7 @@ in an export may reference a path outside that export.
 ### `lib/` — `lib/README.md`
 
 ```
-fixtures.run(fixture_root, match_predicate) -> (failures, notes)   # (proposed, M2)
+fixtures.run(fixture_root, match_predicate) -> (failures, notes)   # frozen, M2
 ```
 Library entry point, not a CLI. Reproduces `ux-audit`'s `check_fixtures.py` semantics:
 `must_find` / `must_not_find` / `max_severity` / `max_findings` / `min_overall` / `max_overall`
