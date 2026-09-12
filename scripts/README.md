@@ -10,7 +10,7 @@ then. It freezes on that script's first commit. Every script here is stdlib-only
 on the gate path may never gain a dependency — CI runs on a stock Python with no virtualenv.
 
 ```
-check_shape.py SKILL_DIR [--spec SKILL-SHAPE.md]        # (proposed, M1)
+check_shape.py SKILL_DIR [--spec SKILL-SHAPE.md]        # frozen, M1
 ```
 Verifies a skill directory against the mandatory parts of the shape spec. Exit 1 with one line
 per violation, naming the spec part number. Conditional parts are checked only when the
