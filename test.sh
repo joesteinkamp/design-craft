@@ -69,6 +69,18 @@ else
   "$PY" "$DIR/scripts/check_shape.py" "$DIR/_template" 2>&1 | sed 's/^/       /'
 fi
 
+# lib/fixtures.py is an extraction, not a rewrite: it must reproduce ux-audit's
+# check_fixtures.py byte-for-byte, and it must be able to fail. Its own test owns
+# both claims and skips cleanly where no ux-audit checkout exists.
+lib_out="$("$PY" "$DIR/lib/tests/test_fixtures.py" 2>&1)"; lib_rc=$?
+if [ "$lib_rc" -eq 0 ]; then
+  ok "lib/fixtures reproduces the reference and fails when it should"
+  printf '%s\n' "$lib_out" | sed -n 's/^  ok   /       · /p'
+else
+  bad "lib/fixtures reproduces the reference and fails when it should"
+  printf '%s\n' "$lib_out" | sed 's/^/       /'
+fi
+
 echo ""
 echo "== each check can fail (deliberate breakages) =="
 
