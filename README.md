@@ -14,7 +14,7 @@ gracefully when the project supplies nothing.
 [`ux-audit`](https://github.com/joesteinkamp/ux-audit-skill) is the layer's first and, today,
 only inhabitant. The layer does not need inventing; it needs specifying and populating.
 
-## Status — scaffolded, no skills yet
+## Status — spec written, no skills yet
 
 **No skill lives here yet, and that is deliberate.** Milestone **M0 is complete**: the
 repository has its gate, its frozen contracts, and CI *before* it has content, so every later
@@ -22,10 +22,23 @@ milestone has something to fail against. `./test.sh` passes on a checkout with z
 is proven able to fail — each check is run against a deliberately broken fixture tree and
 required to exit non-zero, because a check that cannot fail is not a gate.
 
-What exists: `test.sh`, `scripts/{check_caps,check_contracts,check_ledger}.py`, `lib/` with its
-frozen contracts, `CLAUDE.md` for the pack's conventions, and CI on a stock Python — the gate
-path is stdlib-only by rule and may never gain a dependency. Next is **M1**: the shape spec,
-the `_template/` skeleton, and `docs/TRIGGER-LEDGER.md`.
+**M1 is complete too.** [`SKILL-SHAPE.md`](SKILL-SHAPE.md) is the shape every skill in the layer
+is built against, with each part carrying its **CONFIRMED / CORRECTED / PROPOSED** and
+**mandatory / conditional** markings in the document itself — a reader can tell which rules
+describe a working skill and which are proposals nobody has run. `_template/` is a skeleton
+with every mandatory part stubbed and its contract stated, and it satisfies the spec it ships
+beside. [`docs/TRIGGER-LEDGER.md`](docs/TRIGGER-LEDGER.md) records every phrase claimed today
+across the three repositories, including the two collisions that already exist between repos
+this pack does not own.
+
+**The acceptance test is a command now:** `python3 scripts/check_shape.py <ux-audit-checkout>`
+exits 0 against an unmodified checkout. If it ever fails there, the spec is wrong and gets
+corrected — `ux-audit` is not edited to fit.
+
+What exists: `test.sh` (12 checks, each proven able to fail), `scripts/` with four checkers,
+`lib/` with its frozen contracts, `SKILL-SHAPE.md`, `_template/`, `CLAUDE.md`, and CI on a
+stock Python — the gate path is stdlib-only by rule and may never gain a dependency. Next is
+**M2**: `lib/fixtures.py`, the shared gate runner.
 
 | Document | What it holds |
 |---|---|

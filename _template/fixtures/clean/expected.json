@@ -1,0 +1,11 @@
+{
+  "comment": "Clean control (Part 4.6). must_find is EMPTY on purpose: this fixture exists to make false positives fail. Populate must_not_find with the findings a careless run would manufacture here, and add the inputs alongside this file.",
+  "must_find": [],
+  "must_not_find": [
+    {"any_principles": ["TODO-ID"], "note": "TODO: a finding that must not be manufactured on clean input"}
+  ],
+  "max_severity": "low",
+  "max_findings": 0,
+  "min_overall": 85,
+  "baseline_scores": null
+}

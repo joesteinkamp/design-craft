@@ -43,6 +43,32 @@ for c in check_contracts check_caps check_ledger; do
   fi
 done
 
+# The shape spec's acceptance test: check_shape must exit 0 against an UNMODIFIED
+# ux-audit. The checkout is not present in CI, so this runs opportunistically and
+# says when it was skipped — the authoritative run is recorded in the commit that
+# lands the spec, against a read-only checkout.
+UXA="${UX_AUDIT_CHECKOUT:-$HOME/projects/ux-audit-skill}"
+if [ -d "$UXA" ]; then
+  if "$PY" "$DIR/scripts/check_shape.py" "$UXA" --spec "$DIR/SKILL-SHAPE.md" >/dev/null 2>&1; then
+    ok "check_shape exits 0 against an unmodified ux-audit (the acceptance test)"
+  else
+    bad "check_shape exits 0 against an unmodified ux-audit (the acceptance test)"
+    "$PY" "$DIR/scripts/check_shape.py" "$UXA" 2>&1 | sed 's/^/       /'
+    echo "       If ux-audit is right, the SPEC is wrong. Correct SKILL-SHAPE.md."
+  fi
+else
+  ok "acceptance test skipped — no ux-audit checkout at $UXA"
+fi
+
+# The template must satisfy the spec it ships beside: a skeleton that fails its
+# own shape is not a starting point, it is a trap.
+if "$PY" "$DIR/scripts/check_shape.py" "$DIR/_template" --spec "$DIR/SKILL-SHAPE.md" >/dev/null 2>&1; then
+  ok "_template satisfies every mandatory part of the spec"
+else
+  bad "_template satisfies every mandatory part of the spec"
+  "$PY" "$DIR/scripts/check_shape.py" "$DIR/_template" 2>&1 | sed 's/^/       /'
+fi
+
 echo ""
 echo "== each check can fail (deliberate breakages) =="
 
@@ -98,6 +124,25 @@ if "$PY" "$DIR/scripts/check_ledger.py" "$B4" >/dev/null 2>&1; then
   ok "check_ledger reports a collision owned elsewhere without failing"
 else
   bad "check_ledger reports a collision owned elsewhere without failing"
+fi
+
+# 5. A skill missing a mandatory part. Built from the template with its fixture
+#    checker removed, so the breakage is one real omission rather than an empty dir.
+B5="$TMP/b5"; cp -R "$DIR/_template" "$B5"; rm -f "$B5/scripts/check_fixtures.py"
+if "$PY" "$DIR/scripts/check_shape.py" "$B5" >/dev/null 2>&1; then
+  bad "check_shape fails on a skill missing a mandatory part"
+else
+  ok "check_shape fails on a skill missing a mandatory part"
+fi
+
+# 6. A corpus without its parser contract. Conditional parts must be checked when
+#    their trigger is present, and ignored when it is not.
+B6="$TMP/b6"; cp -R "$DIR/_template" "$B6"; mkdir -p "$B6/references/corpus"
+printf -- '---\nid: TODO-01\n---\n\nentry\n' > "$B6/references/corpus/entry.md"
+if "$PY" "$DIR/scripts/check_shape.py" "$B6" >/dev/null 2>&1; then
+  bad "check_shape fails on a corpus with no _format.md"
+else
+  ok "check_shape fails on a corpus with no _format.md"
 fi
 
 echo ""

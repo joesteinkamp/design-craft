@@ -19,6 +19,7 @@ from pathlib import Path
 
 LEDGER = "docs/TRIGGER-LEDGER.md"
 OWN_REPO = "design-craft"
+KNOWN_HEADING = "## Known collisions"
 
 
 def rows(text):
@@ -38,6 +39,22 @@ def rows(text):
     return out
 
 
+def known_rows(text):
+    """Rows of the Known-collisions table: shared term | owner A | owner B | note.
+
+    These collide on a concept rather than a literal phrase — "audit" means a
+    rendered surface to one skill and a source tree to another — so the duplicate
+    check above cannot see them. They are declared instead, and reported, because
+    a collision nobody can act on still has to be visible to whoever adds the
+    next skill.
+    """
+    start = text.find(KNOWN_HEADING)
+    if start == -1:
+        return []
+    nxt = text.find("\n## ", start + len(KNOWN_HEADING))
+    return rows(text[start:nxt if nxt != -1 else len(text)])
+
+
 def main():
     root = Path(sys.argv[1] if len(sys.argv) > 1 else ".")
     lp = root / LEDGER
@@ -52,7 +69,11 @@ def main():
         print(f"check_ledger: {LEDGER} has no parsable rows", file=sys.stderr)
         return 2
 
+    declared = known_rows(lp.read_text(encoding="utf-8"))
+    entries = [e for e in entries if e not in declared]
     seen, failures, known = {}, [], []
+    for d in declared:
+        known.append(f'{d["object"]} — {d["owner"]} vs {d["repo"]} (declared, owned elsewhere)')
     for e in entries:
         for ph in e["phrases"]:
             if ph in seen:
