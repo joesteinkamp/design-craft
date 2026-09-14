@@ -150,7 +150,23 @@ reproduce.
 
 ---
 
-## M3 — `design-diagram`, the first skill built to the spec
+## M3 — `design-diagram`, the first skill built to the spec — **NOT PROCEEDING (2026-09-14)**
+
+> **Stopped by the owner:** *"I don't need that skill. I don't get it."* Recorded here rather
+> than left looking pending, so no later session picks it up as scheduled work.
+>
+> Two things had already narrowed the case. `DESIGN-PLAN.md` §7 concluded the evidence
+> supported a spec and two skills rather than five, and the gap this skill was to fill —
+> diagrams falling through to whatever the model reached for — was substantially closed on
+> 2026-09-10 by a *rule* instead: `agent-global-instructions`' artifact policy now states when
+> a diagram earns its place and what it must be (inline SVG or mermaid, selectable labels,
+> both themes, no shapes invented to balance a composition). A rule costs nothing to maintain;
+> a skill costs a corpus, a validator, fixtures and a gate.
+>
+> **M4, M5 and M6 are stopped with it.** M4 (export) has nothing to export, M5
+> (`slop-detect`) was already conditional and never approved, and M6 (disposition review)
+> reviews a populated layer. The plan below is kept as written — it is the record of a
+> decision, and if a second skill is ever wanted it starts here.
 
 **What changes.** The first skill the pack owns. It reads a described structure and a project's
 `DESIGN.json` when one exists, and emits an SVG diagram whose colours resolve to that project's
