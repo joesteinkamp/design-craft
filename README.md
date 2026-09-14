@@ -14,7 +14,7 @@ gracefully when the project supplies nothing.
 [`ux-audit`](https://github.com/joesteinkamp/ux-audit-skill) is the layer's first and, today,
 only inhabitant. The layer does not need inventing; it needs specifying and populating.
 
-## Status — spec and shared gate runner, no skills yet
+## Status — M0–M2 complete; M3 onward stopped
 
 **No skill lives here yet, and that is deliberate.** Milestone **M0 is complete**: the
 repository has its gate, its frozen contracts, and CI *before* it has content, so every later
@@ -45,8 +45,22 @@ extracted — `lib/registry.py` waits for M3 to prove a second registry exists.
 What exists: `test.sh` (13 checks, each proven able to fail), `scripts/` with four checkers,
 `lib/fixtures.py`, `SKILL-SHAPE.md`, `_template/`, `docs/TRIGGER-LEDGER.md`, `CLAUDE.md`, and
 CI on a stock Python — the gate path is stdlib-only by rule and may never gain a dependency.
-Next is **M3**: `design-diagram`, the first skill built *to* the spec rather than derived from
-one.
+**M3 onward is stopped, not pending.** The owner does not want `design-diagram`, which was to
+be the layer's second skill and the first built *to* the spec rather than derived from one.
+Without it there is no second inhabitant, and M4 (export), M5 (`slop-detect`, already
+conditional and never approved) and M6 (disposition review) all existed to serve a populated
+layer. They are not scheduled.
+
+This is the conclusion `DESIGN-PLAN.md` §7 reached from the other direction — *"the evidence
+supports a spec and two skills, not a layer of five"* — carried one step further by the person
+who would have used them. The honest read now is **a spec and one skill**: `ux-audit`, which
+already existed and stays in its own repository.
+
+**What was built still stands on its own.** The gate, the shape spec, the ledger and the
+fixture runner are a working description of what a layer-3 skill is, with a checker that
+proves the description is accurate against a real skill. That has value as documentation of a
+pattern even if nothing new is ever built to it — and if a second skill is ever wanted, M3's
+plan is written and the scaffolding is here.
 
 | Document | What it holds |
 |---|---|
